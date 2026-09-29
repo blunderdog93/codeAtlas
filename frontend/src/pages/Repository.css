@@ -1,0 +1,469 @@
+/* =========================
+   GLOBAL REPOSITORY LAYOUT
+   ========================= */
+
+.repository-page {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  overflow: hidden;
+  background: #0d1117;
+  color: #c9d1d9;
+}
+
+/* =========================
+   SIDEBAR
+   ========================= */
+
+.repository-sidebar {
+  width: 290px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+
+  background: #161b22;
+  border-right: 1px solid #30363d;
+
+  overflow: hidden;
+}
+
+.sidebar-top {
+  padding: 16px;
+  border-bottom: 1px solid #30363d;
+}
+
+.brand {
+  margin-bottom: 14px;
+}
+
+.brand-name {
+  color: #f0f6fc;
+  font-size: 19px;
+  font-weight: 650;
+  letter-spacing: -0.3px;
+}
+
+.new-repository-button {
+  width: 100%;
+  height: 34px;
+
+  border: 1px solid #30363d;
+  border-radius: 6px;
+
+  background: #21262d;
+  color: #c9d1d9;
+
+  font-size: 13px;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  transition: background 0.15s ease;
+}
+
+.new-repository-button:hover {
+  background: #30363d;
+}
+
+.explorer-header {
+  height: 38px;
+  display: flex;
+  align-items: center;
+
+  padding: 0 16px;
+
+  color: #8b949e;
+  font-size: 11px;
+  font-weight: 650;
+  letter-spacing: 0.6px;
+
+  border-bottom: 1px solid #21262d;
+}
+
+.repository-name {
+  min-height: 36px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+  padding: 7px 14px;
+
+  color: #f0f6fc;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.repository-folder-icon {
+  font-size: 14px;
+}
+
+.tree-container {
+  flex: 1;
+  min-height: 0;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.tree-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.tree-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.tree-container::-webkit-scrollbar-thumb {
+  background: #30363d;
+  border-radius: 10px;
+}
+
+/* =========================
+   MAIN
+   ========================= */
+
+.repository-main {
+  min-width: 0;
+  min-height: 0;
+
+  height: 100vh;
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+}
+
+.repository-header {
+  height: 64px;
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+
+  padding: 0 28px;
+
+  background: #0d1117;
+  border-bottom: 1px solid #30363d;
+}
+
+.repository-header h1 {
+  margin: 0 0 3px;
+
+  color: #f0f6fc;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.repository-header p {
+  margin: 0;
+
+  color: #6e7681;
+  font-size: 12px;
+}
+
+/* =========================
+   CONTENT AREA
+   ========================= */
+
+.repository-content {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+
+  /*
+    This creates the space around the editor.
+    No scrolling happens here.
+  */
+  padding: 24px 28px 28px;
+
+  box-sizing: border-box;
+
+  overflow: hidden;
+}
+
+/* =========================
+   WELCOME
+   ========================= */
+
+.welcome-panel {
+  width: min(700px, calc(100% - 48px));
+
+  margin: 90px auto;
+
+  text-align: center;
+}
+
+.welcome-icon {
+  width: 64px;
+  height: 64px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: 0 auto 24px;
+
+  border: 1px solid #30363d;
+  border-radius: 12px;
+
+  background: #161b22;
+  color: #58a6ff;
+
+  font-family: monospace;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.welcome-panel h2 {
+  margin: 0 0 10px;
+
+  color: #f0f6fc;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.welcome-panel > p {
+  margin: 0;
+
+  color: #8b949e;
+  font-size: 14px;
+}
+
+/* =========================
+   INFO CARDS
+   ========================= */
+
+.welcome-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  gap: 12px;
+  margin-top: 35px;
+}
+
+.info-card {
+  display: flex;
+  align-items: flex-start;
+
+  gap: 12px;
+  padding: 16px;
+
+  border: 1px solid #30363d;
+  border-radius: 8px;
+
+  background: #161b22;
+
+  text-align: left;
+}
+
+.info-icon {
+  font-size: 18px;
+}
+
+.info-card div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.info-card strong {
+  color: #c9d1d9;
+  font-size: 13px;
+}
+
+.info-card span {
+  color: #6e7681;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+/* =========================
+   FILE PREVIEW / EDITOR
+   ========================= */
+
+.file-preview {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+
+  border: 1px solid #30363d;
+  border-radius: 10px;
+  background: #161b22;
+}
+
+.file-preview-header {
+  height: 58px;
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+
+  padding: 0 20px;
+
+  border-bottom: 1px solid #30363d;
+
+  color: #f0f6fc;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.file-preview-body {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+
+  overflow: hidden;
+}
+
+.code-viewer {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  margin: 0;
+  padding: 24px 28px;
+
+  box-sizing: border-box;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  background: #0d1117;
+  color: #c9d1d9;
+
+  font-family: "Consolas", "Courier New", monospace;
+  font-size: 14px;
+  line-height: 1.7;
+
+  white-space: pre-wrap !important;
+  overflow-wrap: anywhere !important;
+  word-break: break-word !important;
+}
+
+.code-viewer code {
+  display: block;
+
+  width: 100%;
+  max-width: 100%;
+
+  white-space: pre-wrap !important;
+  overflow-wrap: anywhere !important;
+  word-break: break-word !important;
+}
+
+/*
+   IMPORTANT:
+   The scrollbar belongs ONLY to the
+   code viewer.
+*/
+
+.code-viewer::-webkit-scrollbar {
+  width: 8px;
+}
+
+.code-viewer::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.code-viewer::-webkit-scrollbar-thumb {
+  background: #30363d;
+  border-radius: 10px;
+}
+
+.code-viewer::-webkit-scrollbar-thumb:hover {
+  background: #30363d;
+}
+
+/* =========================
+   ERROR
+   ========================= */
+
+.repository-error {
+  width: 100%;
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: #0d1117;
+}
+
+.repository-error-card {
+  width: 420px;
+
+  padding: 32px;
+
+  border: 1px solid #30363d;
+  border-radius: 10px;
+
+  background: #161b22;
+
+  text-align: center;
+}
+
+.repository-error-card h1 {
+  margin: 0 0 10px;
+
+  color: #f0f6fc;
+  font-size: 22px;
+}
+
+.repository-error-card p {
+  margin: 0 0 24px;
+
+  color: #8b949e;
+  font-size: 14px;
+}
+
+.repository-error-card button {
+  width: 100%;
+  height: 40px;
+
+  border: none;
+  border-radius: 6px;
+
+  background: #238636;
+  color: white;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.repository-error-card button:hover {
+  background: #2ea043;
+}
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+
+@media (max-width: 700px) {
+  .repository-sidebar {
+    width: 230px;
+  }
+
+  .repository-content {
+    padding: 16px;
+  }
+
+  .welcome-info {
+    grid-template-columns: 1fr;
+  }
+
+  .welcome-panel {
+    margin-top: 50px;
+  }
+}

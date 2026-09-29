@@ -1,5 +1,7 @@
 const { cloneRepository } = require("../services/gitService");
 
+const pool = require("../db/db");
+
 async function cloneAndAnalyze(req, res) {
   try {
     const { githubUrl, path } = req.body;
@@ -18,4 +20,19 @@ async function cloneAndAnalyze(req, res) {
     });
   }
 }
-module.exports = { cloneAndAnalyze };
+
+async function getRepositories(req, res) {
+  try {
+    const [repositories] = await pool.execute("SELECT * FROM repositories");
+
+    return res.status(200).json(repositories);
+  } catch (err) {
+    console.error(err);
+
+    return res.status(500).json({
+      error: err.message,
+    });
+  }
+}
+
+module.exports = { cloneAndAnalyze, getRepositories };

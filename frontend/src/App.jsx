@@ -1,11 +1,16 @@
-import { useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Input from "./pages/Input";
+import Repository from "./pages/Repository";
+import RepositoryHome from "./pages/RepositoryHome";
 
 function App() {
   return (
-    <>
-      <Input />
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<RepositoryHome />} />
+        <Route path="/repository/:id" element={<Repository />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

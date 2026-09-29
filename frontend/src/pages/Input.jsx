@@ -1,17 +1,19 @@
 import { useState } from "react";
-import "../input.css";
+import { useNavigate } from "react-router-dom";
+import "./Input.css";
 
 function Input() {
+  const navigate = useNavigate();
+
   const [githubUrl, setGithubUrl] = useState("");
   const [path, setPath] = useState("");
-  const [success, setSuccess] = useState(false);
-  const [repositoryPath, setRepositoryPath] = useState("");
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
   async function handleSubmit(e) {
     e.preventDefault();
 
-    setSuccess(false);
+    setLoading(true);
     setError("");
 
     try {
@@ -35,34 +37,39 @@ function Input() {
         throw new Error(data.error || "Failed to clone repository");
       }
 
-      setRepositoryPath(data.repositoryPath);
-      setSuccess(true);
+      navigate("/repo", {
+        state: {
+          repositoryPath: data.repositoryPath,
+          structure: data.structure,
+        },
+      });
     } catch (error) {
-      setError(error.message);
+      setError(error.message || "Something went wrong");
+      setLoading(false);
     }
   }
 
-  if (success) {
+  if (loading) {
     return (
       <main className="input-page">
-        <div className="input-card success-card">
-          <div className="success-icon">✓</div>
+        <div className="input-card loading-card">
+          <div className="loading-spinner"></div>
 
-          <h1>Repository cloned</h1>
+          <h1>Cloning repository...</h1>
 
-          <p className="subtitle">Your repository was successfully cloned.</p>
+          <p className="subtitle">
+            Downloading the repository and building its file structure.
+          </p>
 
-          <div className="repository-location">
-            <span>Location</span>
-            <strong>{repositoryPath}</strong>
+          <div className="loading-repository">
+            <span className="loading-label">Repository</span>
+            <span className="loading-value">{githubUrl}</span>
           </div>
 
-          <button
-            className="clone-another-btn"
-            onClick={() => setSuccess(false)}
-          >
-            Clone Another Repository
-          </button>
+          <div className="loading-status">
+            <span className="status-dot"></span>
+            This may take a moment...
+          </div>
         </div>
       </main>
     );
@@ -83,35 +90,43 @@ function Input() {
         <h1>code@las</h1>
 
         <p className="subtitle">
-          Enter a GitHub URL to analyze the repository.
+          Enter a GitHub repository to analyze its structure.
         </p>
 
         <form className="github-form" onSubmit={handleSubmit}>
-          <label htmlFor="github-url">GitHub repository URL</label>
+          <div className="form-group">
+            <label htmlFor="github-url">GitHub repository URL</label>
 
-          <input
-            id="github-url"
-            type="url"
-            placeholder="https://github.com/user/repository"
-            value={githubUrl}
-            onChange={(e) => setGithubUrl(e.target.value)}
-            required
-          />
+            <input
+              id="github-url"
+              type="url"
+              placeholder="https://github.com/user/repository"
+              value={githubUrl}
+              onChange={(e) => setGithubUrl(e.target.value)}
+              required
+            />
+          </div>
 
-          <label htmlFor="repository-path">Local repository path</label>
+          <div className="form-group">
+            <label htmlFor="repository-path">Local repository path</label>
 
-          <input
-            id="repository-path"
-            type="text"
-            placeholder="D:\test"
-            value={path}
-            onChange={(e) => setPath(e.target.value)}
-            required
-          />
+            <input
+              id="repository-path"
+              type="text"
+              placeholder="D:\test"
+              value={path}
+              onChange={(e) => setPath(e.target.value)}
+              required
+            />
 
-          {error && <p className="error-message">{error}</p>}
+            <small>The repository will be cloned into this location.</small>
+          </div>
 
-          <button type="submit">Clone Repository</button>
+          {error && <div className="error-message">{error}</div>}
+
+          <button type="submit" className="clone-button">
+            Clone Repository
+          </button>
         </form>
       </div>
     </main>
